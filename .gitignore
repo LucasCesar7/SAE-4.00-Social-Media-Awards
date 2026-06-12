@@ -1,4 +1,5 @@
-.env
+﻿.env
+config/.env
 .phpunit.result.cache
 
 # Local-only project tracking docs (must stay out of Git)
@@ -10,4 +11,3 @@ app/Services/TrelloService.php
 app/Services/TrelloProjectSyncService.php
 
 vendor/
-

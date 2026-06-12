@@ -5,7 +5,7 @@ class Env {
     private static $loaded = false;
     
     /**
-     * Loads environment variables from the .env file.
+     * Loads environment variables from config/.env or root .env.
      */
     public static function load() {
         // Avoid loading the file more than once.
@@ -14,8 +14,8 @@ class Env {
         }
         
         $envCandidates = [
-            dirname(__DIR__) . '/.env',
             __DIR__ . '/.env',
+            dirname(__DIR__) . '/.env',
         ];
 
         $envFile = null;
@@ -27,7 +27,7 @@ class Env {
         }
 
         if ($envFile === null) {
-            error_log('Fichier .env introuvable (racine du projet ou config/.env).');
+            error_log('Fichier .env introuvable (config/.env ou racine du projet).');
             return false;
         }
         

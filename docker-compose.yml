@@ -9,14 +9,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      APP_ENV: docker
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_NAME: social_media_awards
-      DB_USER: sma_user
-      DB_PASS: sma_password
-      DB_CHARSET: utf8mb4
+    env_file:
+      - config/.env
     ports:
       - "8080:80"
     volumes:
@@ -25,11 +19,8 @@ services:
   db:
     image: mysql:8.0.43
     container_name: sma-db
-    environment:
-      MYSQL_DATABASE: social_media_awards
-      MYSQL_USER: sma_user
-      MYSQL_PASSWORD: sma_password
-      MYSQL_ROOT_PASSWORD: root
+    env_file:
+      - config/.env
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
       interval: 10s
@@ -49,12 +40,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      PMA_USER: root
-      PMA_PASSWORD: root
-      MYSQL_ROOT_PASSWORD: root
+    env_file:
+      - config/.env
     ports:
       - "8081:80"
 
